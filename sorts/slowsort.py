@@ -11,8 +11,21 @@ Source: https://en.wikipedia.org/wiki/Slowsort
 
 from __future__ import annotations
 
+from typing import Protocol, TypeVar
 
-def slowsort(sequence: list, start: int | None = None, end: int | None = None) -> None:
+
+class Comparable(Protocol):
+
+    def __lt__(self, other: object, /) -> bool:
+        ...
+def slowsort(
+    sequence: list[T], start: int | None = None, end: int | None = None
+) -> None:
+
+T = TypeVar("T", bound=Comparable)
+def slowsort(sequence: list[T], start: int | None = None, end: int | None = None) -> None:
+
+
     """
     Sorts sequence[start..end] (both inclusive) in-place.
     start defaults to 0 if not given.
