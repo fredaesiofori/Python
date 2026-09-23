@@ -18,14 +18,14 @@ class Comparable(Protocol):
 
     def __lt__(self, other: object, /) -> bool:
         ...
+
+
+T = TypeVar("T", bound=Comparable)
+
+
 def slowsort(
     sequence: list[T], start: int | None = None, end: int | None = None
 ) -> None:
-
-T = TypeVar("T", bound=Comparable)
-def slowsort(sequence: list[T], start: int | None = None, end: int | None = None) -> None:
-
-
     """
     Sorts sequence[start..end] (both inclusive) in-place.
     start defaults to 0 if not given.
@@ -47,6 +47,10 @@ def slowsort(sequence: list[T], start: int | None = None, end: int | None = None
     [5, 6, 7, 8, 9, 4, 3, 2, 1, 0]
     >>> seq = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]; slowsort(seq, start = 5); seq
     [9, 8, 7, 6, 5, 0, 1, 2, 3, 4]
+    >>> seq = ["cherry", "banana", "apple", "date"]; slowsort(seq); seq
+    ['apple', 'banana', 'cherry', 'date']
+    >>> seq = [3.14, -1.0, 2.5, 0.0]; slowsort(seq); seq
+    [-1.0, 0.0, 2.5, 3.14]
     """
     if start is None:
         start = 0
